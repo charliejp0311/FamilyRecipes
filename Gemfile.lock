@@ -17,6 +17,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     arel (6.0.4)
     bcrypt (3.1.13)
+    bigdecimal (1.4.4)
     bond (0.5.1)
     builder (3.2.4)
     capybara (3.32.1)
@@ -109,6 +110,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord (~> 4.2, >= 4.2.6)
   bcrypt
+  bigdecimal (~> 1.4)
   capybara
   pry
   rack-test

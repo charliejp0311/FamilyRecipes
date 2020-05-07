@@ -1,0 +1,47 @@
+git remote add origin https://github.com/charliejp0311/FamilyRecipes.git
+git push -u origin master
+
+MODELS
+
+USER
+Password
+Username
+Email
+Has_many recipes
+Has_many comments
+Timestamp
+
+RECIPE
+Ingredients
+Suggested_preperation_method
+Cook_time
+Belongs to user via
+      Author_id => user_id
+Has_many comments
+Timestamp
+
+COMMENTS
+Comment
+Belongs to recipe
+Belongs to user
+Timestamp
+
+
+VIEWS
+
+USER
+login
+Logout
+Signup
+recipes list
+
+RECIPES
+All recipes
+    Show_recent_3_comments
+    (Link to show_recipe)
+New_recipe
+Edit_recipe
+Show_recipe
+    Create_comment_form
+    Show_all_comments
+    (Comment link to comment author recipes)

@@ -2,7 +2,13 @@ class UsersController < ApplicationController
 
   # GET: /users
   get "/users" do
-    erb :"/users/index.html"
+    if logged_in?
+      @user = User.find_by_id(session[:id])
+      @recipes = @user.recipes 
+      erb :"/users/index.html"
+    else
+      redirect '/welcome'
+    end
   end
 
   # GET: /users/new
@@ -12,8 +18,8 @@ class UsersController < ApplicationController
 
   # POST: /users
   post "/users" do
-    @user = User.create(params)
-    session[:user_id] = @user.id
+    @user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])
+    session[:id] = @user.id
     redirect "/users"
   end
 

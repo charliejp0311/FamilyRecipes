@@ -10,18 +10,7 @@ class UsersController < ApplicationController
       redirect '/welcome'
     end
   end
-
-  # POST: /user/login
-  post "/users/login" do
-    if !params["username"].empty? && !params["password"].empty?
-      @user = User.find_by_username(params["username"])
-      if @user.password == @user.authenticate(params["password"])
-        redirect '/users/<%=@user.id%>'
-      else
-        redirect '/welcome'
-      end
-  end
-
+  
   # GET: /users/new
   get "/users/new" do
     erb :"/users/new.html"
@@ -30,11 +19,11 @@ class UsersController < ApplicationController
   # POST: /users
   post "/users" do
     if logged_in?
-      redirect '/users/<%=session[:id]%>'
+      redirect "/users/#{session[:id]}"
     else
       @user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])
       session[:id] = @user.id
-      redirect "/users/<%=@user.id%>"
+      redirect "/users/#{@user.id}"
     end
   end
 

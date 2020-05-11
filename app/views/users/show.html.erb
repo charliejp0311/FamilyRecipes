@@ -1,9 +1,11 @@
 <h1>Welcome, <%=@user.username%></h1>
-<h3>You have <%=@users.recipes.count%> recipes!</h3>
+<%if !@user.recipes.empty?%>
+    <h3>You have <%=@users.recipes.count%> recipes!</h3>
+<%end%>
 <p>Would you like to delete your profie?</p>
-# <form action="/users/<%=@user.id%>/edit" action="get">
+<!--# <form action="/users/<%=@user.id%>/edit" action="get">
 #     <input type="submit" value="Edit">
-# </form>
-<form action="/users/<%=@user.id%>/delete" action="get">
-    <input type="delete" value="Delete">
+# </form> --!>
+<form action="/users/<%=@user.id%>/delete" action="delete">
+    <button type="delete">Delete</button>
 </form>

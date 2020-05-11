@@ -12,6 +12,21 @@ class ApplicationController < Sinatra::Base
   get "/" do
     erb :welcome
   end
+  
+  # POST: /login
+  post "/login" do
+    if !params["username"].empty? && !params["password"].empty?
+      @user = User.find_by_username(params["username"])
+      if @user.password == @user.authenticate(params["password"])
+        session[:id] = @user.id
+        redirect '/users/<%=@user.id%>'
+      else
+        redirect '/'
+      end
+    else
+      redirect '/'
+    end
+  end
 
   helpers do
 		def logged_in?

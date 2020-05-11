@@ -1,1 +1,9 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1>Welcome, <%=@user.username%></h1>
+<h3>You have <%=@users.recipes.count%> recipes!</h3>
+<p>Would you like to delete your profie?</p>
+# <form action="/users/<%=@user.id%>/edit" action="get">
+#     <input type="submit" value="Edit">
+# </form>
+<form action="/users/<%=@user.id%>/delete" action="get">
+    <input type="delete" value="Delete">
+</form>

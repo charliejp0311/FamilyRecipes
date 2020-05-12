@@ -57,7 +57,8 @@ class UsersController < ApplicationController
       if !params["password"].empty?
         @user.password = params["password"]
       end
-    redirect "/users/:id"
+      redirect "/users/:id"      
+    end
   end
 
   # DELETE: /users/5/delete
@@ -69,4 +70,5 @@ class UsersController < ApplicationController
       redirect "/users"
     end
   end
+
 end

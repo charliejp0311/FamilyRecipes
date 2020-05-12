@@ -1,1 +1,10 @@
-<h1>Insert the form to create a new instance of your model.</h1>
+<h1>New Recipe</h1>
+<form method="post" action="/recipes">
+    <label for="title">Recipe title:</label><br>
+    <input type="text" name="title"><br>
+    <label for="ingredients">Ingredients</label><br>
+    <input type="textarea" name="ingredients"><br>
+    <label for="cook_time">Cook time:</label><br>
+    <input type="text" name="cook_time"><br>
+    <input type="submit" value="Create recipe">
+</form>

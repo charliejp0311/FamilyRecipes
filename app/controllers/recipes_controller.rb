@@ -2,22 +2,46 @@ class RecipesController < ApplicationController
 
   # GET: /recipes
   get "/recipes" do
-    erb :"/recipes/index.html"
+    if logged_in?
+      erb :"/recipes/index.html"
+    else
+      redirect "/"
+    end
   end
 
   # GET: /recipes/new
   get "/recipes/new" do
-    erb :"/recipes/new.html"
+    if logged_in?
+      erb :"/recipes/new.html"
+    else
+      redirect "/"
+    end
   end
 
   # POST: /recipes
   post "/recipes" do
-    redirect "/recipes"
+    if logged_in? 
+      if !params["title"].empty? && !params["ingredients"].empty? && !params["cook_time"].empty?
+        @recipe = Recipe.create(:title => params["title"], :ingredients => params["ingredients"], :cook_time => params["cook_time"])
+        @recipe.user_id = current_user.id
+        redirect "/recipes/#{@recipe.id}"
+      else
+        redirect "/recipes/new"
+      end
+    else
+      redirect '/'
+    end
   end
 
   # GET: /recipes/5
   get "/recipes/:id" do
-    erb :"/recipes/show.html"
+    if logged_in?
+      @recipe = Recipe.find_by_id(params["id"])
+      @user = @recipe.user
+      erb :"/recipes/show.html"
+    else
+      redirect '/'
+    end
   end
 
   # GET: /recipes/5/edit

@@ -46,16 +46,48 @@ class RecipesController < ApplicationController
 
   # GET: /recipes/5/edit
   get "/recipes/:id/edit" do
-    erb :"/recipes/edit.html"
+    if logged_in?
+      @recipe = Recipe.find_by_id(params["id"])
+      if @recipe.user = current_user
+        erb :"/recipes/edit.html"
+      else
+        redirect "/recipes/#{@recipe.id}"
+      end
+    else
+      redirect '/'
+    end
   end
 
   # PATCH: /recipes/5
   patch "/recipes/:id" do
-    redirect "/recipes/:id"
+    @recipe = Recipe.find_by_id(params["id"])
+    if logged_in? && 
+      if @recipe.user == current_user
+        @user = current_user
+        if !params["title"].empty? && !params["ingredients"].empty? && !params["cook_time"].empty?
+          @recipe.title = params["title"]
+          @recipe.ingredients = params["ingredients"]
+          @recipe.cook_time = params["cook_time"]
+          redirect "/recipes/#{@recipe.id}"
+        else
+          redirect "/recipes/#{@recipe.id}/edit"
+        end
+      else
+        redirect "/recipes/#{@recipe.id}"
+      end
+    else
+      redirect '/'
+    end
   end
 
   # DELETE: /recipes/5/delete
   delete "/recipes/:id/delete" do
-    redirect "/recipes"
+    @recipe = Recipe.find_by_id(params["id"])
+    if logged_in? && @recipe.user = current_user
+      @recipe.destroy
+      redirect "/recipes"
+    else
+      redirect "/recipes/#{@recipe.id}"
+    end
   end
 end

@@ -57,7 +57,7 @@ class UsersController < ApplicationController
       if !params["password"].empty?
         @user.password = params["password"]
       end
-      redirect "/users/:id"      
+      redirect "/users/#{@user.id}"      
     end
   end
 

@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
   # GET: /users/5/edit
   get "/users/:id/edit" do
-    if session[:id] == params[:id]
+    if session[:id] == params["id"]
       @user = current_user
       erb :"/users/edit.html"
     else
@@ -49,12 +49,20 @@ class UsersController < ApplicationController
 
   # PATCH: /users/5
   patch "/users/:id" do
+    if current_user.id == params["id"]
+      @user = User.find_by_id(params["id"])
+      if !params["email"].empty?
+        @user.eamil = params["email"]
+      end
+      if !params["password"].empty?
+        @user.password = params["password"]
+      end
     redirect "/users/:id"
   end
 
   # DELETE: /users/5/delete
   delete "/users/:id/delete" do
-    if current_user.id == params[:id]
+    if current_user.id == params["id"]
       current_user.destroy
       redirect '/users/new'
     else

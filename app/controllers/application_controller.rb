@@ -13,7 +13,7 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
   
-  # POST: /login
+  # POST: /login this is from the welcome page the only place to sign in besides when you create a user
   post "/login" do
     if !params["username"].empty? && !params["password"].empty?
       @user = User.find_by_username(params["username"])
@@ -27,7 +27,7 @@ class ApplicationController < Sinatra::Base
       redirect '/'
     end
   end
-
+  #shortcuts for login status to prevent writing the same code over and over
   helpers do
 		def logged_in?
 			!!session[:id]

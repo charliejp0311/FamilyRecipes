@@ -1,0 +1,6 @@
+<h1>Welcome, <%=@user.username%></h1>
+<h3>Here are some recipes</h3>
+<%if !@recipes.empty?%>
+    <%@recipes.each do |recipe|%>
+        <div>
+            <h4><a href="/recipes/<%=recipe.id%>"><%=recipe.title%></a></h4>

@@ -1,13 +1,5 @@
 <h1>Welcome, <%=@user.username%></h1>
 <h3>Here are some recipes</h3>
-<div>
-    <form method="get" action="/recipes/new">
-        <input type="submit" value="Create Recipe">
-    </form>
-    <form method="get" action="/users/logout">
-        <input type="submit" value="Logout">
-    </form>
-</div>
 <%if !@recipes.empty?%>
     <%@recipes.each do |recipe|%>
         <div>

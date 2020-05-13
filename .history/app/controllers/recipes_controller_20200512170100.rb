@@ -2,9 +2,7 @@ class RecipesController < ApplicationController
 
   # GET: /recipes
   get "/recipes" do
-    @recipes = Recipe.all
     if logged_in?
-      @user = current_user
       erb :"/recipes/index.html"
     else
       redirect "/"

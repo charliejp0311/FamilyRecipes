@@ -26,6 +26,7 @@ class RecipesController < ApplicationController
       if !params["title"].empty? && !params["ingredients"].empty? && !params["cook_time"].empty?
         @recipe = Recipe.create(:title => params["title"], :ingredients => params["ingredients"], :cook_time => params["cook_time"])
         @recipe.user_id = current_user.id
+        @recipe.save
         redirect "/recipes/#{@recipe.id}"
       else
         redirect "/recipes/new"
@@ -38,10 +39,15 @@ class RecipesController < ApplicationController
   # GET: /recipes/5
   get "/recipes/:id" do
     if logged_in?
-      @recipe = Recipe.find_by_id(params["id"])
       @user = current_user
+      @recipe = Recipe.find_by_id(params["id"])
+      if @recipe.user == @user
+        @author = @user.username 
+      else
+        @author = @recipe.user.username
+      end
       if @recipe.comments
-        @comments = @recipe.comments
+        @comments = Comment.find_by(:recipe_id => @recipe.id)
         erb :'/recipes/show.html'
       else
         erb :'/recipes/show.html'
@@ -100,7 +106,7 @@ class RecipesController < ApplicationController
 
   post "/recipes/:id/comment" do 
     @user = current_user
-    @recipe = Recipe.find_by_id("id")
+    @recipe = Recipe.find_by_id(params["id"])
     if !params["comment"].empty?
       @comment = Comment.create(:comment => params["comment"], :recipe_id => @recipe.id, :user_id => @user.id)
       redirect "/recipes/#{@recipe.id}"

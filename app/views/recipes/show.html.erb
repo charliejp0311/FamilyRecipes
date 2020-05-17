@@ -1,7 +1,12 @@
-<h1>Welcome, <%=@user.username%></h1>
-<h2><%=@recipe.title%> was writen by <%=@recipe.user.usernamd%></h2>
-<%if @user = @recipe.user%>
-    <form method="get" action="recipes/@recipe.id/edit">
+<div>
+    <h1>Welcome, <%=@user.username%></h1>
+    <h2><%=@recipe.title%> was writen by <%=@author%></h2>
+    <form method="get" action='/recipes'>
+        <input type="submit" value="Recipes">
+    </form>
+</div>
+<%if @user == @recipe.user%>
+    <form method="get" action="/recipes/#{@recipe.id}/edit">
         <input type="submit" value="Edit">
     </form>
 <%end%>
@@ -10,11 +15,11 @@
     <input type="textarea" name="comment">
     <input type="submit" value="Comment">
 </form>
-<%if !@recipe.comments.empty? %>
+<%if @comments %>
     <%@recipe.comments.each do |comment|%>
         <div>
         <p><b><%=comment.user%></b></p>
         <p><%=comment.comment%></p>
         </div>
-    <%end>    
+    <%end%>    
 <%end%>

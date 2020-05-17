@@ -3,6 +3,7 @@ class RecipesController < ApplicationController
   # GET: /recipes
   get "/recipes" do
     @recipes = Recipe.all
+    binding.pry
     if logged_in?
       @user = current_user
       erb :"/recipes/index.html"
@@ -41,17 +42,19 @@ class RecipesController < ApplicationController
     if logged_in?
       @user = current_user
       @recipe = Recipe.find_by_id(params["id"])
+      @comments = []
+      cmts = Comment.all
+      cmts.each do |c|
+        if c.recipe_id == @recipe.id 
+          @comments << c
+        end
+      end
       if @recipe.user == @user
         @author = @user.username 
       else
         @author = @recipe.user.username
       end
-      if @recipe.comments
-        @comments = Comment.find_by(:recipe_id => @recipe.id)
-        erb :'/recipes/show.html'
-      else
-        erb :'/recipes/show.html'
-      end
+      erb :'/recipes/show.html'
     else
       redirect '/'
     end

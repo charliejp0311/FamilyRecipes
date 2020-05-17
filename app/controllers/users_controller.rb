@@ -31,6 +31,7 @@ class UsersController < ApplicationController
   get "/users/:id" do
     if logged_in?
       @user = User.find_by_id(params[:id])
+      @recipes = Recipe.all
       erb :"/users/show.html"
     else
       redirect "/welcome"
@@ -51,6 +52,7 @@ class UsersController < ApplicationController
   patch "/users/:id" do
     if current_user.id == params["id"]
       @user = User.find_by_id(params["id"])
+      @recipes = Recipe.find_by(:user_id => @user.id)
       if !params["email"].empty?
         @user.eamil = params["email"]
       end

@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
       @user = User.find_by_username(params["username"])
       if @user && @user.authenticate(params["password"])
         session[:id] = @user.id
-        redirect '/users/<%=@user.id%>'
+        redirect "/users/#{@user.id}"
       else
         redirect '/'
       end

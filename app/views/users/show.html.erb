@@ -1,6 +1,12 @@
 <h1>Welcome, <%=@user.username%></h1>
-<%if !@user.recipes.empty?%>
-    <h3>You have <%=@users.recipes.count%> recipes!</h3>
+<%if !@recipes.empty? %>
+    <%count = 0%>
+    <%@recipes.each do |recipe|%>
+        <%if recipe.user == @user%>
+            <%count += 1%>
+        <%end%>
+    <%end%>
+    <h3>You have <%=count%> recipes!</h3>
 <% end %>
 
 <form method="get" action='/recipes'>

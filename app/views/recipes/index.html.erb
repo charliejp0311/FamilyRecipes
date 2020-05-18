@@ -1,22 +1,22 @@
 <h1>Welcome, <%=@user.username%></h1>
 <h3>Here are some recipes</h3>
+
 <div>
     <form method="get" action="/recipes/new">
         <input type="submit" value="Create Recipe">
     </form>
-    <form method="get" action="/users/logout">
-        <input type="submit" value="Logout">
+    <form method="get" action="/logout">
+        <input type="submit" value="Log Out">
     </form>
 </div>
-<%if !@recipes.empty?%>
-    <%@recipes.each do |recipe|%>
-        <div>
-            <h4><a href="/recipes/<%=recipe.id%>"><%=recipe.title%></a></h4>
-        </div>
-    <%end%>
-<%end%> 
+
 <%if !@comments.empty?%>
     <%@comments.each do |comment|%>
-        <p><%binding.pry%></p>
+        <div>
+            <h4><a href="/recipes/<%=comment[0].id%>"><%=comment[0].title%></a></h4>
+            <%if comment[1] %>
+                <p><%=comment[1].comment%></p>
+            <%end%>
+        </div>
     <%end%>
 <%end%>

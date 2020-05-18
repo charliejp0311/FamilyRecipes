@@ -27,6 +27,10 @@ class ApplicationController < Sinatra::Base
       redirect '/'
     end
   end
+  get '/logout' do
+    session.clear
+    redirect to '/'
+  end
   #shortcuts for login status to prevent writing the same code over and over
   helpers do
 		def logged_in?

@@ -1,4 +1,7 @@
 <h1>Welcome, <%=@user.username%></h1>
+<form method="get" action="/logout">
+    <button type="submit" value="Log Out"></button>
+</form>
 <%if !@recipes.empty? %>
     <%count = 0%>
     <%@recipes.each do |recipe|%>

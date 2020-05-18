@@ -3,6 +3,10 @@ class RecipesController < ApplicationController
   # GET: /recipes
   get "/recipes" do
     @recipes = Recipe.all
+    @comments = {}
+    @recipes.each do |recipe|
+      @comments[recipe] = Comment.find_by(:recipe_id => recipe.id)
+    end
     binding.pry
     if logged_in?
       @user = current_user

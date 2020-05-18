@@ -12,9 +12,11 @@
     <%@recipes.each do |recipe|%>
         <div>
             <h4><a href="/recipes/<%=recipe.id%>"><%=recipe.title%></a></h4>
-            <%if !recipe.comments.empty?%>
-                <p><%=recipe.comments.last%></p>
-            <%end%>
         </div>
     <%end%>
-<%end%>        
+<%end%> 
+<%if !@comments.empty?%>
+    <%@comments.each do |comment|%>
+        <p><%binding.pry%></p>
+    <%end%>
+<%end%>

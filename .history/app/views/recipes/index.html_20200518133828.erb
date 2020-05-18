@@ -1,0 +1,20 @@
+<h1>Welcome, <%=@user.username%></h1>
+<h3>Here are some recipes</h3>
+<div>
+    <form method="get" action="/recipes/new">
+        <input type="submit" value="Create Recipe">
+    </form>
+    <form method="get" action="/users/logout">
+        <input type="submit" value="Logout">
+    </form>
+</div>
+<!--<%if !@recipes.empty?%>
+    <%@recipes.each do |recipe|%>
+        <div>
+            <h4><a href="/recipes/<%=recipe.id%>"><%=recipe.title%></a></h4>
+            <%if !@comments.empty?%>
+                <p><%binding.pry%></p>
+            <%end%>
+        </div>
+    <%end%>
+<%end%> --!>      

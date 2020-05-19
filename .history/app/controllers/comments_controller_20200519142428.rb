@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 
   # GET: /comments/5/edit
   get "/comments/:id/edit" do
-    if logged_in? && @comment.user = current_user
+    if logged_in?
       @comment = Comment.find_by_id(params["id"])
       erb :"/comments/edit.html"
     else
@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
 
   # PATCH: /comments/5
   patch "/comments/:id" do
-    if logged_in? && @comment.user = current_user
+    if logged_in?
       @comment = Comment.find_by_id(params["id"])
       @comment.comment = params["comment"]
       @recipe = Recipe.find_by_id(@comment.recipe_id)
@@ -24,13 +24,7 @@ class CommentsController < ApplicationController
 
   # DELETE: /comments/5/delete
   delete "/comments/:id/delete" do
-    @comment = Comment.find_by_id(params["id"])
-    if logged_in? && @comment.user = current_user
-      @comment.destroy
-      redirect "/recipes"
-    else
-      redirect "/recipes/#{@comment.recipe_id}"
-    end
+    redirect "/comments"
   end
 
 end

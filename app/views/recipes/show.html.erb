@@ -22,6 +22,11 @@
         <div>
         <p><b><%=comment.user.username%></b></p>
         <p><%=comment.comment%></p>
+        <%if @user == comment.user%>
+            <form method="get" action='/comments/<%=comment.id%>/edit'>
+                <input type="submit" value="Edit">
+            </form>
+        <%end%>
         </div>
     <%end%>    
 <%end%>

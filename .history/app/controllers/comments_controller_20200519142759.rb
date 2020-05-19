@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 
   # GET: /comments/5/edit
   get "/comments/:id/edit" do
-    if logged_in? && @comment.user = current_user
+    if logged_in?
       @comment = Comment.find_by_id(params["id"])
       erb :"/comments/edit.html"
     else

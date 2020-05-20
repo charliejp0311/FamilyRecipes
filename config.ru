@@ -7,3 +7,4 @@ end
 run ApplicationController
 use RecipesController
 use UsersController
+use CommentsController

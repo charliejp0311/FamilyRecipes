@@ -5,7 +5,6 @@
     <input type="textarea" name="comment" value="<%=@comment.comment%>"><br>
     <input type="submit" value="Edit comment">
 </form>
-<form method="get" action="/comments/<%=@comment.id%>/delete">
-    <!--<input id="hidden" type="hidden" name="_method" value="DELETE">--!>
-    <input type="submit" id="delete" value="Delete comment">
+<form method="delete" action="/comments/@comment.id/delete">
+    <input type="submit" id="delete" vlaue="delete">
 </forn>

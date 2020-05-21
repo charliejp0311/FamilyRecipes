@@ -9,3 +9,7 @@
     <input type="text" name="cook_time" value="<%=@recipe.cook_time%>"><br>
     <input type="submit" value="Edit recipe">
 </form>
+<form method="get" action="/recipes/<%=@recipe.id%>/delete">
+    <!--<input id="hidden" type="hidden" name="_method" value="DELETE">--!>
+    <input type="submit" id="delete" value="Delete recipe">
+</forn>

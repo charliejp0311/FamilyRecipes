@@ -1,0 +1,14 @@
+<h1>Family Recipes</h1>
+<h3>Edit User form, please fill out all fields.</h3>
+<form action="/users/:id" method="post">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
+    <label for="email">Email</label><br>
+    <input type="email" name="email" value="<%=@user.email%>"><br>
+    <label for="password">Password</label><br>
+    <input type="password" name="password" value="<%=@user.password%>">
+    <input type="submit" value="Edit">
+</form>
+<form method="get" action="/users/<%=@user.id%>/delete">
+    <!--<input id="hidden" type="hidden" name="_method" value="DELETE">--!>
+    <input type="submit" id="delete" value="Delete user">
+</forn>

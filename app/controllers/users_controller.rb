@@ -63,6 +63,13 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/users/:id/delete' do
+    if logged_in? && User.find_by_id(params[:id]).user == current_user
+      User.find_by_id(params[:id]).destroy
+      redirect '/'
+    end
+  end
+
   # DELETE: /users/5/delete
   delete "/users/:id/delete" do
     if current_user.id == params["id"]

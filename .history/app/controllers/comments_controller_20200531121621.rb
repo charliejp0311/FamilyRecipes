@@ -14,11 +14,10 @@ class CommentsController < ApplicationController
   patch "/comments/:id" do
     @user = current_user
     @comment = Comment.find_by_id(params["id"])
-    if logged_in? && @comment.user == @user
+    if logged_in? && @comment.user = current_user
       @comment.comment = params["comment"]
-      @comment.save
       @recipe = Recipe.find_by_id(@comment.recipe_id)
-      redirect "/recipes/#{@recipe.id}"
+      redirect "/recipes/@recipe.id"
     else
       redirect "/"
     end

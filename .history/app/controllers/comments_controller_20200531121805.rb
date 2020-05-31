@@ -16,9 +16,8 @@ class CommentsController < ApplicationController
     @comment = Comment.find_by_id(params["id"])
     if logged_in? && @comment.user == @user
       @comment.comment = params["comment"]
-      @comment.save
       @recipe = Recipe.find_by_id(@comment.recipe_id)
-      redirect "/recipes/#{@recipe.id}"
+      redirect "/recipes/@recipe.id"
     else
       redirect "/"
     end

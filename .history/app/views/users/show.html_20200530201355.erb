@@ -1,0 +1,26 @@
+<h1>Welcome, <%=@user.username%></h1>
+<form method="get" action="/logout">
+    <button type="submit" value="Log Out"></button>
+</form>
+<%if !@recipes.empty? %>
+    <%count = 0%>
+    <%@recipes.each do |recipe|%>
+        <%if recipe.user == @user%>
+            <%count += 1%>
+        <%end%>
+    <%end%>
+    <h3>You have <%=count%> recipes!</h3>
+<% end %>
+
+<form method="get" action='/recipes'>
+    <label for="recipes">Lets make a recipe</label><br>
+    <input type="submit" value="Recipes">
+</form>
+
+<p>Would you like to edit or delete your profie?</p>
+<form action="/users/<%=@user.id%>/edit" action="get">
+    <input type="submit" value="Edit">
+</form>
+<form action="/users/<%=@user.id%>/delete" action="delete">
+    <button type="delete">Delete</button>
+</form>

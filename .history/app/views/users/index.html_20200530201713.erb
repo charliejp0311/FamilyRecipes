@@ -1,0 +1,8 @@
+<h1>Welcome <a href="/users/<%=@user.id%>"><%=@user.username%></a></h1>
+<p>Time to start making recipes!</p>
+<button action="recipes/new" method="get">Recipes</button>
+<%if !@recipes.empty?%>
+    <% @recipes.each do |recipe|%>
+        <a href="/recipes/<%=recipe.id%>"><%=recipe.title%></a>
+    <%end%>
+<%end%>

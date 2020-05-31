@@ -1,5 +1,5 @@
 <h1>Edit Recipe</h1>
-<form method="post" action="/recipes">
+<form method="post" action="/recipes/<%=@recipe.id%>">
     <input id="hidden" type="hidden" name="_method" value="PATCH">
     <label for="title">Recipe title:</label><br>
     <input type="text" name="title" value="<%=@recipe.title%>"><br>
@@ -9,7 +9,7 @@
     <input type="text" name="cook_time" value="<%=@recipe.cook_time%>"><br>
     <input type="submit" value="Edit recipe">
 </form>
-<form method="get" action="/recipes/<%=@recipe.id%>/delete">
+<form method="delete" action="/recipes/<%=@recipe.id%>/delete">
     <!--<input id="hidden" type="hidden" name="_method" value="DELETE">--!>
     <input type="submit" id="delete" value="Delete recipe">
 </forn>

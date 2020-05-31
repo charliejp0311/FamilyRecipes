@@ -87,6 +87,7 @@ class RecipesController < ApplicationController
           @recipe.title = params["title"]
           @recipe.ingredients = params["ingredients"]
           @recipe.cook_time = params["cook_time"]
+          @recipe.save
           redirect "/recipes/#{@recipe.id}"
         else
           redirect "/recipes/#{@recipe.id}/edit"
@@ -102,20 +103,22 @@ class RecipesController < ApplicationController
   get '/recipes/:id/delete' do
     if logged_in? && Recipe.find_by_id(params[:id]).user == current_user
       Recipe.find_by_id(params[:id]).destroy
-      redirect '/'
+      redirect '/recipes'
     end
   end
 
-  # DELETE: /recipes/5/delete
-  delete "/recipes/:id/delete" do
-    @recipe = Recipe.find_by_id(params["id"])
-    if logged_in? && @recipe.user = current_user
-      @recipe.destroy
-      redirect "/recipes"
-    else
-      redirect "/recipes/#{@recipe.id}"
-    end
-  end
+  # # DELETE: /recipes/5/delete
+  # delete "/recipes/:id/delete" do
+  #   @recipe = Recipe.find_by_id(params["id"])
+  #   @user = current_user
+  #   binding.pry
+  #   if logged_in? && @recipe.user = @user
+  #     @recipe.destroy
+  #     redirect "/recipes"
+  #   else
+  #     redirect "/recipes/#{@recipe.id}"
+  #   end
+  # end
 
   post "/recipes/:id/comment" do 
     @user = current_user

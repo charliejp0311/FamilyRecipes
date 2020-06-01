@@ -45,6 +45,7 @@ class RecipesController < ApplicationController
     if logged_in?
       @user = current_user
       @recipe = Recipe.find_by_id(params["id"])
+      binding.pry
       @comments = []
       cmts = Comment.all
       cmts.each do |c|
